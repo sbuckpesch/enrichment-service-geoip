@@ -1,0 +1,45 @@
+{
+  "integrations": {},
+  "context": {
+    "page": {
+      "path": "/smartlink.php",
+      "referrer": "http://news.lipo.ch/u/nrd.php?p=UtKppS41l2_47757_3504697_161_855&ems_l=3352085&i=1&d=MjAxOCtLVzIyK0RFK1NvbmRlcm5ld3NsZXR0ZXIrVGlwcHNwaWVsK05hY2h2ZXJzYW5k%7CMjAxOA%3D%3D%7CMDY%3D%7CMDI%3D%7CSmV0enQrVGVpbG5laG1lbg%3D%3D%7CMTc4MDEyMTcy%7CVXRLcHBTNDFsMg%3D%3D%7CNjkwMzAzMTJhYWY4ODhkYTE%3D%7C",
+      "search": "?lang=de_DE",
+      "title": "Das grosse Tippspiel 2018!",
+      "url": "https://www.tippspiel.cc/smartlink.php?appId=22212&lang=de_DE"
+    },
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 11_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.0 Mobile/15E148 Safari/604.1",
+    "library": {
+      "name": "analytics.js",
+      "version": "2.11.0"
+    },
+    "traits": {
+      "crossDomainId": "3b171328-cced-4efd-a090-974c99a9d9e9"
+    },
+    "campaign": {},
+    "ip": "194.230.159.123"
+  },
+  "traits": {
+    "crossDomainId": "3b171328-cced-4efd-a090-974c99a9d9e9"
+  },
+  "userId": null,
+  "anonymousId": "3b171328-cced-4efd-a090-974c99a9d9e9",
+  "timestamp": "2018-06-02T21:34:39.015Z",
+  "type": "identify",
+  "companyId": 3448,
+  "appId": 22212,
+  "sentAt": "2018-06-02T21:34:39.015Z",
+  "messageId": "66b2c451-c116-42a9-9e94-00ab9c879c7c",
+  "receivedAt": "2018-06-02T21:34:39.013Z",
+  "event": "identify",
+  "stage": "production",
+  "aggregations": [
+    {
+      "name": "GeoIp",
+      "functionName": "aa-data-enrichment-geoip-production-index",
+      "body": {
+        "ip": "194.230.159.123"
+      }
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+service: enrichment-service-geoip
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  memorySize: 128 # optional, in MB, default is 1024
+  #timeout: 10 # optional, in seconds, default is 6
+  versionFunctions: false # optional, default is true
+
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, "eu-central-1"}
+  vpc: ${file(config/${self:provider.stage}.yml):vpc}
+
+  cfLogs: true
+  environment: ${file(config/${self:provider.stage}.yml):ENVIRONMENT}
+
+  iamRoleStatements:
+    # Allow the lambda function to be deployed into an existing VPCZ
+    - Effect: Allow
+      Action:
+        - "logs:CreateLogGroup"
+        - "logs:CreateLogStream"
+        - "logs:PutLogEvents"
+        - "ec2:CreateNetworkInterface"
+        - "ec2:DescribeNetworkInterfaces"
+        - "ec2:DeleteNetworkInterface"
+      Resource:
+        - '*'
+
+functions:
+  index:
+    handler: handler.index

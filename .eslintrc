@@ -1,0 +1,12 @@
+{
+  "extends": "airbnb",
+  "rules"  : {
+    "key-spacing": [
+      1,
+      {
+        "align": "colon",
+        "beforeColon": true
+      }
+    ]
+  }
+}
