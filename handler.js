@@ -26,9 +26,12 @@ exports.index = async (event) => {
       event.context.location = {};
       event.context.location.city = geo.city;
       event.context.location.country = geo.country;
-      event.context.location.latitude = geo.ll[0];
-      event.context.location.longitude = geo.ll[1];
-      event.context.location.ll = [geo.ll[1], geo.ll[0]];
+      event.context.location.region = geo.region;
+      event.context.location.metro = geo.metro;
+      event.context.location.zip = geo.zip;
+      event.context.location.lat = geo.ll[0];
+      event.context.location.long = geo.ll[1];
+      event.context.location.geopoint = [geo.ll[1], geo.ll[0]];
       log.debug('Geo location added to event.context: \n', util.inspect(event.context));
     } else {
       log.debug('No Geo data available for the submitted IP.');
