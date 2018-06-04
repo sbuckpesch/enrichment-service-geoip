@@ -29,22 +29,14 @@ exports.index = async (event) => {
       event.context.location.latitude = geo.ll[0];
       event.context.location.longitude = geo.ll[1];
       event.context.location.ll = [geo.ll[1], geo.ll[0]];
-		log.debug('Geo location added to event.context: \n', util.inspect(event.context));
+      log.debug('Geo location added to event.context: \n', util.inspect(event.context));
     } else {
-		log.debug('No Geo data available for the submitted IP.');
+      log.debug('No Geo data available for the submitted IP.');
     }
-
-
-
     return event;
   } catch (err) {
     // Global error handling
-    console.error(`Error processing aggregation: ${err}`);
-    return {
-      statusCode : 500,
-      body       : JSON.stringify({
-        message : `Error processing aggregations: ${err}`,
-      }),
-    };
+    log.error(`Error processing aggregation: ${err}`);
+    throw new Error(err);
   }
 };
