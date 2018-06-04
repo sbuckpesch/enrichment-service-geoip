@@ -9,23 +9,9 @@ provider:
 
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, "eu-central-1"}
-  vpc: ${file(config/${self:provider.stage}.yml):vpc}
 
   cfLogs: true
   environment: ${file(config/${self:provider.stage}.yml):ENVIRONMENT}
-
-  iamRoleStatements:
-    # Allow the lambda function to be deployed into an existing VPCZ
-    - Effect: Allow
-      Action:
-        - "logs:CreateLogGroup"
-        - "logs:CreateLogStream"
-        - "logs:PutLogEvents"
-        - "ec2:CreateNetworkInterface"
-        - "ec2:DescribeNetworkInterfaces"
-        - "ec2:DeleteNetworkInterface"
-      Resource:
-        - '*'
 
 functions:
   index:
