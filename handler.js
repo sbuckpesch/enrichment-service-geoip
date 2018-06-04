@@ -39,7 +39,7 @@ exports.index = async (event) => {
     return event;
   } catch (err) {
     // Global error handling
-    log.error(`Error processing aggregation: ${err}`);
+    console.error(`Error processing aggregation: ${err}`);
     throw new Error(err);
   }
 };

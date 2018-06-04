@@ -16,3 +16,43 @@ provider:
 functions:
   index:
     handler: handler.index
+    onError: ${self:custom.prefix-sns-arn}-DeadLetterTopic
+
+custom:
+  prefix: ${self:service}-${self:provider.stage}
+  prefix-sns-arn: arn:aws:sns:${self:provider.region}:${self:provider.environment.SERVERLESS_AWS_ACCOUNT_ID}:${self:custom.prefix}
+
+resources:
+  Resources:
+    # Error monitoring queue
+    DeadLetterTopic:
+      Type: AWS::SNS::Topic
+      Properties:
+        Subscription:
+          - Endpoint:
+              Fn::GetAtt:
+                - DeadLetterQueue
+                - Arn
+            Protocol: "sqs"
+        TopicName: ${self:custom.prefix}-DeadLetterTopic
+    DeadLetterQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: ${self:custom.prefix}-DeadLetterQueue
+
+    # IAM Policies
+    QueuePolicySNSToSQS:
+      Type: AWS::SQS::QueuePolicy
+      Properties:
+        PolicyDocument:
+          Version: '2012-10-17'
+          Id: QueuePolicySNSToSQS
+          Statement:
+          - Sid: AllowSendMessageToQueuesFromSNSTopics
+            Effect: Allow
+            Principal: "*"
+            Action:
+            - sqs:SendMessage
+            Resource: arn:aws:sqs:${self:provider.region}:${self:provider.environment.SERVERLESS_AWS_ACCOUNT_ID}:*
+        Queues:
+        - Ref: DeadLetterQueue
